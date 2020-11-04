@@ -1,11 +1,22 @@
 import React from "react"
 import TasksList from "./TasksList";
 
-export const ToDoList = () => {
+class ToDoList extends Component {
+    componentDidMount(){
+        this.props.getTaskList()
+    }
+    render(){
   return(
     <>
     <h1 className="title">Todo List</h1>
-    <TasksList />
+    <TasksList 
+    tasks = {this.props.tasks}
+    onCreate = {this.props.createTask}
+    onDelete = {this.props.deleteTask}
+    onChange = {this.props.updateTask}
+    />
     </>
   )
 }
+}
+export default ToDoList
