@@ -38,6 +38,8 @@ module.exports = (env, argv) => {
         resolve: {
             extensions: [".js", ".jsx"],
         },
+        devtool: isProduction ? 'source-map' : 'inline-source-map',
+
         devServer: {
             hot: true,
             historyApiFallback: true,

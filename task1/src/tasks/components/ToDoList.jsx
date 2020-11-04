@@ -3,7 +3,7 @@ import TasksList from "./TasksList";
 import * as tasksAction from "../tasks.actions"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-class ToDoList extends Component {
+class TodoList extends Component {
     componentDidMount(){
         this.props.getTaskList()
     }
@@ -34,4 +34,4 @@ const mapDispatch ={
 getTaskList: tasksAction.getTaskList 
 
 }
-export default connect(null, mapDispatch)(ToDoList)
+export default connect(null, mapDispatch)(TodoList)

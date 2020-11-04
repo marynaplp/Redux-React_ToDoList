@@ -1,10 +1,10 @@
 import React from "react";
-import ToDoList from "./tasks/components/ToDoList.jsx"
+import TodoList from "./tasks/components/TodoList.jsx"
 import { Provider } from "redux-react"; 
 import store from "./store.js"
 const App = () => (
     <Provider store={store}>
-        <ToDoList />
+        <TodoList />
     </Provider>
 );
 
