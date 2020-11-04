@@ -1,1 +1,0 @@
-export const taskListSelector = (state) => state.users.taskList;

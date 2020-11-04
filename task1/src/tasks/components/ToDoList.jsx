@@ -1,6 +1,7 @@
 import React from "react"
 import TasksList from "./TasksList";
 import * as tasksAction from "../tasks.actions"
+import { sortedTaskListSelector } from "../tasks.selectors"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 class TodoList extends Component {
@@ -34,4 +35,4 @@ const mapDispatch ={
 getTaskList: tasksAction.getTaskList 
 
 }
-export default connect(null, mapDispatch)(TodoList)
+export default connect(mapState, mapDispatch)(TodoList)
