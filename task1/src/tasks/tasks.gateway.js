@@ -1,5 +1,5 @@
 const baseUrl =
-    "https://5ecedb5261c8480016701a8f.mockapi.io/api/v1/";
+    "https://5ecedb5261c8480016701a8f.mockapi.io/api/v1/tasks";
 export const createTask = taskData => {
     return fetch(baseUrl, {
         method: "POST",

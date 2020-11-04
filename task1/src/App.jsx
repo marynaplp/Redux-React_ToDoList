@@ -1,12 +1,13 @@
 import React from "react";
-import TasksList from "./TasksList.jsx"
+import ToDoList from "./tasks/components/ToDoList.jsx"
+import { Provider } from "redux-react"; 
+import store from "./store.js"
+const App = () => (
+    <Provider store={store}>
+        <ToDoList />
+    </Provider>
+);
 
-const App = () => {
-  return(
-    <>
-    <h1 className="title">Todo List</h1>
-    <TasksList />
-    </>
-  )
-}
-export default App
+export default App;
+
+
