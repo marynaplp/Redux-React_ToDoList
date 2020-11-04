@@ -1,5 +1,5 @@
 const baseUrl =
-    "https://crudcrud.com/api/8c6e0cac14eb422ca76fc0adab558629/tasks";
+    "https://5ecedb5261c8480016701a8f.mockapi.io/api/v1/";
 export const createTask = taskData => {
     return fetch(baseUrl, {
         method: "POST",
