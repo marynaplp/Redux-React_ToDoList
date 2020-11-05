@@ -1,12 +1,12 @@
-import React from "react"
+import React, { Component } from "react"
 import TasksList from "./TasksList";
 import * as tasksAction from "../tasks.actions"
-import { sortedTaskListSelector } from "../tasks.selectors"
+import { sortedTasksListSelector } from "../tasks.selectors"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 class TodoList extends Component {
     componentDidMount(){
-        this.props.getTaskList()
+        this.props.getTasksList()
     }
     render(){
   return(
@@ -22,17 +22,25 @@ class TodoList extends Component {
   )
 }
 }
-ToDoListPropTypes = {
-  tasks: PropTypes.array(PropTypes.shape()),
-  updateTask:PropTypes.func.isRequired,
-  getTaskList: PropTypes.func.isRequired,
-  createTask:PropTypes.func.isRequired,
-  deleteTask:PropTypes.func.isRequired
+// TodoList.propTypes = {
+//   tasks: PropTypes.array(PropTypes.shape()),
+//   updateTask:PropTypes.func.isRequired,
+//   getTaskList: PropTypes.func.isRequired,
+//   createTask:PropTypes.func.isRequired,
+//   deleteTask:PropTypes.func.isRequired
 
-}
+// }
 
 const mapDispatch ={
-getTaskList: tasksAction.getTaskList 
+getTasksList: tasksAction.getTasksList,
+updateTask: tasksAction.updateTask,
+createTask:tasksAction.createTask,
+deleteTask: tasksAction.deleteTask, 
 
 }
+const mapState = (state) => {
+    return {
+        tasks: sortedTasksListSelector(state),
+    };
+};
 export default connect(mapState, mapDispatch)(TodoList)

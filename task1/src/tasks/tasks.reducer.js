@@ -4,7 +4,7 @@ const initialState = {
     taskList: []
 }
 
-export const taskReducer = (state = initialState, action) => {
+const taskReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case TASK_LIST_RECEIVED:
@@ -17,3 +17,4 @@ export const taskReducer = (state = initialState, action) => {
             return state
     }
 }
+export default taskReducer

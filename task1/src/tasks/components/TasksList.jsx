@@ -17,12 +17,21 @@ const  TasksList = ({tasks, onCreate, onDelete, onChange}) =>{
               {...task}
               onDelete={onDelete}
               onChange={onChange}
-              //id={task.id} text={task.text} done= {task.done}
             />
           ))}
         </ul>
       </div>
     );
   };
-
+// TasksList.propTypes = {
+//   tasks:PropTypes.arrayOf(
+//     PropTypes.shape({
+//       text:PropTypes.string,
+//       done: PropTypes.bool,
+//       id:PropTypes.string,
+//     })
+//   ).isRequired,
+//   onChange:PropTypes.func.isRequired,
+//   onDelete:PropTypes.func.isRequired,
+// }
 export default TasksList 

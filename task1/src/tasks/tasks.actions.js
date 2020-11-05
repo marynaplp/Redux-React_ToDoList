@@ -12,14 +12,15 @@ const taskListReceived = taskList => {
     }
 }
 
-export const getTaskList = () => {
+export const getTasksList = () => {
     const thunkAction = function(dispatch) {
-        fetchTasksList().then(taskList => {
-            dispatch(taskListReceived(taskList))
-        })
-    }
-    return thunkAction
-}
+        tasksGateway
+            .fetchTasksList()
+            .then((tasksList) => dispatch(taskListReceived(tasksList)));
+    };
+
+    return thunkAction;
+};
 export const updateTask = taskId => {
     const thunkAction = function(dispatch, getState) {
         const state = getState();
@@ -30,14 +31,14 @@ export const updateTask = taskId => {
             done: !task.done,
         };
         tasksGateway.updateTask(taskId, updatedTask)
-            .then(() => dispatch(getTaskList()))
+            .then(() => dispatch(getTasksList()))
     }
     return thunkAction
 }
 export const deleteTask = taskId => {
     const thunkAction = function(dispatch) {
         tasksGateway.deleteTask(taskId)
-            .then(() => dispatch(getTaskList()))
+            .then(() => dispatch(getTasksList()))
     }
     return thunkAction
 }
@@ -49,7 +50,7 @@ export const createTask = text => {
             createdAt: new Date().toISOString(),
         };
         tasksGateway.createTask(newTask)
-            .then(() => dispatch(getTaskList()))
+            .then(() => dispatch(getTasksList()))
     }
     return thunkAction
 }
