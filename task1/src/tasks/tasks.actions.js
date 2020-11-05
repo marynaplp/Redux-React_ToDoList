@@ -1,13 +1,13 @@
 import * as tasksGateway from "./tasks.gateway";
-import { taskListSelector } from "./tasks.selectors"
+import { tasksListSelector } from "./tasks.selectors"
 
-export const TASK_LIST_RECEIVED = 'TASK/TASK_LIST_RECEIVED';
+export const TASKS_LIST_RECEIVED = 'TASK/TASK_LIST_RECEIVED';
 
-const taskListReceived = taskList => {
+const tasksListReceived = tasksList => {
     return {
-        type: TASK_LIST_RECEIVED,
+        type: TASKS_LIST_RECEIVED,
         payload: {
-            taskList,
+            tasksList,
         }
     }
 }
@@ -16,7 +16,7 @@ export const getTasksList = () => {
     const thunkAction = function(dispatch) {
         tasksGateway
             .fetchTasksList()
-            .then((tasksList) => dispatch(taskListReceived(tasksList)));
+            .then((tasksList) => dispatch(tasksListReceived(tasksList)));
     };
 
     return thunkAction;
@@ -24,8 +24,8 @@ export const getTasksList = () => {
 export const updateTask = taskId => {
     const thunkAction = function(dispatch, getState) {
         const state = getState();
-        const taskList = taskListSelector(state);
-        const task = taskList.find(task => task.id === taskId)
+        const tasksList = tasksListSelector(state);
+        const task = tasksList.find(task => task.id === taskId)
         const updatedTask = {
             ...task,
             done: !task.done,
@@ -43,7 +43,7 @@ export const deleteTask = taskId => {
     return thunkAction
 }
 export const createTask = text => {
-    const thunkAction = function(dispatch, getState) {
+    const thunkAction = function(dispatch) {
         const newTask = {
             text,
             done: false,

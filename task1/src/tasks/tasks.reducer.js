@@ -1,20 +1,20 @@
-import { TASK_LIST_RECEIVED } from "./tasks.actions"
+import { TASKS_LIST_RECEIVED } from "./tasks.actions"
 
 const initialState = {
-    taskList: []
+    tasksList: []
 }
 
-const taskReducer = (state = initialState, action) => {
+const tasksReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case TASK_LIST_RECEIVED:
+        case TASKS_LIST_RECEIVED:
             return {
                 ...state,
-                taskList: action.payload.taskList
+                tasksList: action.payload.tasksList
             }
 
         default:
             return state
     }
 }
-export default taskReducer
+export default tasksReducer

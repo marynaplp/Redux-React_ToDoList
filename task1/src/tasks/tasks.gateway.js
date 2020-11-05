@@ -15,25 +15,13 @@ export const createTask = taskData => {
     })
 }
 
-export const fetchTasksList = () => {
+export const fetchTasksList = () =>
+    fetch(baseUrl).then((response) => {
+        if (response.ok) return response.json();
 
-    return fetch(baseUrl)
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-        })
-        .then(tasksList => {
-            return tasksList.map(({
-                _id,
-                ...task
-            }) => ({
-                id: _id,
-                ...task,
-            }));
+        throw new Error("Failed to load tasks");
+    });
 
-        });
-}
 export const updateTask = (taskId, taskData) => {
     return fetch(`${baseUrl}/${taskId}`, {
         method: 'PUT',

@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 
-export const taskListSelector = (state) => state.tasks.taskList;
+export const tasksListSelector = (state) => state.tasks.tasksList;
 
 export const sortedTasksListSelector = createSelector(
-    [taskListSelector],
+    [tasksListSelector],
     (tasksList) => {
         return tasksList.slice().sort((a, b) => a.done - b.done);
     }

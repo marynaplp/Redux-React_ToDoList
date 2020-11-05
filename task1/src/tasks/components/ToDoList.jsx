@@ -6,7 +6,7 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 class TodoList extends Component {
     componentDidMount(){
-        this.props.getTasksList()
+        this.props.getTaskList()
     }
     render(){
   return(
