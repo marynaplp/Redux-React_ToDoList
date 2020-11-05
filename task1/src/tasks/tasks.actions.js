@@ -1,18 +1,20 @@
 import * as tasksGateway from "./tasks.gateway";
-import { tasksListSelector } from "./tasks.selectors"
+import { tasksListSeletor } from "./tasks.selectors";
 
-export const TASKS_LIST_RECEIVED = 'TASK/TASK_LIST_RECEIVED';
+export const TASKS_LIST_RECEIVED = "TASKS/TASKS_LIST_RECEIVED";
 
-const tasksListReceived = tasksList => {
-    return {
+export const tasksListReceived = (tasksList) => {
+    const action = {
         type: TASKS_LIST_RECEIVED,
         payload: {
             tasksList,
-        }
-    }
-}
+        },
+    };
 
-export const getTasksList = () => {
+    return action;
+};
+
+export const getTaskList = () => {
     const thunkAction = function(dispatch) {
         tasksGateway
             .fetchTasksList()
@@ -21,36 +23,42 @@ export const getTasksList = () => {
 
     return thunkAction;
 };
-export const updateTask = taskId => {
+
+export const updateTask = (taskId) => {
     const thunkAction = function(dispatch, getState) {
         const state = getState();
-        const tasksList = tasksListSelector(state);
-        const task = tasksList.find(task => task.id === taskId)
+        const tasksList = tasksListSeletor(state);
+        const taskItem = tasksList.find((task) => task.id === taskId);
         const updatedTask = {
-            ...task,
-            done: !task.done,
+            ...taskItem,
+            done: !taskItem.done,
         };
-        tasksGateway.updateTask(taskId, updatedTask)
-            .then(() => dispatch(getTasksList()))
-    }
-    return thunkAction
-}
-export const deleteTask = taskId => {
+
+        tasksGateway
+            .updateTask(taskId, updatedTask)
+            .then(() => dispatch(getTaskList()));
+    };
+
+    return thunkAction;
+};
+
+export const deleteTask = (taskId) => {
     const thunkAction = function(dispatch) {
-        tasksGateway.deleteTask(taskId)
-            .then(() => dispatch(getTasksList()))
-    }
-    return thunkAction
-}
-export const createTask = text => {
+        tasksGateway.deleteTask(taskId).then(() => dispatch(getTaskList()));
+    };
+
+    return thunkAction;
+};
+
+export const createTask = (text) => {
     const thunkAction = function(dispatch) {
         const newTask = {
             text,
             done: false,
             createdAt: new Date().toISOString(),
         };
-        tasksGateway.createTask(newTask)
-            .then(() => dispatch(getTasksList()))
-    }
-    return thunkAction
-}
+        tasksGateway.createTask(newTask).then(() => dispatch(getTaskList()));
+    };
+
+    return thunkAction;
+};
